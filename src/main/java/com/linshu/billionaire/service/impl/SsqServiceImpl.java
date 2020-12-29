@@ -1,20 +1,20 @@
 package com.linshu.billionaire.service.impl;
 
-import com.linshu.billionaire.entity.User;
-import com.linshu.billionaire.mapper.UserMapper;
-import com.linshu.billionaire.service.UserService;
+import com.linshu.billionaire.entity.SsqEntity;
+import com.linshu.billionaire.mapper.SsqMapper;
+import com.linshu.billionaire.service.SsqService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class SsqServiceImpl implements SsqService {
     @Autowired
-    private UserMapper userMapper;
+    private SsqMapper userMapper;
 
     @Override
-    public List<User> findAll() {
+    public List<SsqEntity> findAll() {
         return userMapper.findAll();
     }
 }

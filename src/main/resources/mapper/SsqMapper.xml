@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.linshu.billionaire.mapper.UserMapper">
-    <select id="findAll" resultType="User">
-        SELECT * FROM tb_user
+<mapper namespace="com.linshu.billionaire.mapper.SsqMapper">
+    <select id="findAll" resultType="SsqEntity">
+        SELECT * FROM t_ssq limit 10
     </select>
 </mapper>
