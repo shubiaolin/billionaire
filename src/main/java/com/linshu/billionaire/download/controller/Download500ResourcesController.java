@@ -1,16 +1,32 @@
 package com.linshu.billionaire.download.controller;
 
 import com.linshu.billionaire.download.util.FetchUrlResources;
+import com.linshu.billionaire.service.SsqService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class Download500ResourcesController {
+
+    public static Download500ResourcesController Download500;
+
+    @PostConstruct
+    public void init() {
+        Download500 = this;
+    }
+
+    @Autowired
+    private SsqService ssqService;
+
     private String period = "20065";
     private String turnStr = "$turn$";
     private String ssqUrl = "https://kaijiang.500.com/shtml/ssq/$turn$.shtml";
@@ -38,15 +54,19 @@ public class Download500ResourcesController {
     private FetchUrlResources fetchUrlResources = new FetchUrlResources();
 
     public void getTurn() {
-        this.setLoadingTurn(true);
-        String dbPeriod = "20131"; //TODO 需要在这里获取数据库里面最大的期数，来对比
-        Document doc = fetchUrlResources.fetchUrl(this.ssqUrl.replace(this.turnStr, this.period));
-        Elements turnElements = doc.select("div.iSelectList a");
-        List<String> turns = turnElements.stream().sorted(Comparator.comparing(Element::text)).map(Element::text).collect(Collectors.toList());
-        if(turns.size() > 0){
-            this.getBall(turns.subList(turns.indexOf(dbPeriod),turns.size()));
-        }
-        this.setLoadingTurn(false);
+//        System.out.println(ssqService.getMaxNumId());
+//        System.out.println(ssqService.selectAllList());
+//        System.out.println(ssqService.selectById(5).toString());
+
+//        this.setLoadingTurn(true);
+//        String dbPeriod = "20131"; //TODO 需要在这里获取数据库里面最大的期数，来对比
+//        Document doc = fetchUrlResources.fetchUrl(this.ssqUrl.replace(this.turnStr, this.period));
+//        Elements turnElements = doc.select("div.iSelectList a");
+//        List<String> turns = turnElements.stream().sorted(Comparator.comparing(Element::text)).map(Element::text).collect(Collectors.toList());
+//        if(turns.size() > 0){
+//            this.getBall(turns.subList(turns.indexOf(dbPeriod),turns.size()));
+//        }
+//        this.setLoadingTurn(false);
     }
 
     public void reGetBallByDbTurns() {
