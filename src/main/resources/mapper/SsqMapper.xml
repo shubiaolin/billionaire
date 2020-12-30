@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.linshu.billionaire.mapper.SsqMapper">
-    <select id="findAll" resultType="SsqEntity">
-        SELECT * FROM t_ssq limit 10
+    <resultMap id="result" type="com.linshu.billionaire.entity.SsqEntity">
+        <result property="id" column="id" />
+        <result property="numId" column="numId" />
+        <result property="red1" column="red1"/>
+        <result property="red2" column="red2"/>
+        <result property="red3" column="red3"/>
+        <result property="red4" column="red4"/>
+        <result property="red5" column="red5"/>
+        <result property="red6" column="red6"/>
+        <result property="blue" column="blue"/>
+        <result property="redOrder1" column="redOrder1"/>
+        <result property="redOrder2" column="redOrder2"/>
+        <result property="redOrder3" column="redOrder3"/>
+        <result property="redOrder4" column="redOrder4"/>
+        <result property="redOrder5" column="redOrder5"/>
+        <result property="redOrder6" column="redOrder6"/>
+        <result property="openDate" column="openDate"/>
+        <result property="updateTime" column="updateTime"/>
+        <result property="isDownload" column="isDownload"/>
+    </resultMap>
+    
+    <select id="selectAllList" resultMap="result">
+        SELECT * FROM t_ssq
     </select>
+
+    <select id="getMaxNumId" resultType="int">
+        SELECT max(numId) FROM t_ssq
+    </select>
+
+    <select id="selectById" resultMap="result" parameterType="int">
+        SELECT * FROM t_ssq WHERE id = #{id}
+    </select>
+
+
+<!--    SsqEntity selectById();-->
+
+<!--    //TODO 待处理-->
+<!--    List<SsqEntity> selectByConditions(SsqEntity condition);-->
+
+<!--        Boolean insert(SsqEntity entity);-->
+<!--    Boolean insertList(List<SsqEntity> entity);-->
+
+<!--    Boolean update(SsqEntity entity);-->
+<!--    Boolean updateList(List<SsqEntity> entity);-->
+
+<!--    Boolean deleteById(long id);-->
+<!--    Boolean deleteByConditions(SsqEntity entity);-->
 </mapper>

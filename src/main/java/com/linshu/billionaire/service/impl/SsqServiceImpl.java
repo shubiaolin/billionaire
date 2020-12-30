@@ -11,10 +11,20 @@ import java.util.List;
 @Service("userService")
 public class SsqServiceImpl implements SsqService {
     @Autowired
-    private SsqMapper userMapper;
+    private SsqMapper ssqMapper;
 
     @Override
-    public List<SsqEntity> findAll() {
-        return userMapper.findAll();
+    public List<SsqEntity> selectAllList() {
+        return ssqMapper.selectAllList();
+    }
+
+    @Override
+    public int getMaxNumId() {
+        return ssqMapper.getMaxNumId();
+    }
+
+    @Override
+    public SsqEntity selectById(int id) {
+        return ssqMapper.selectById(id);
     }
 }

@@ -10,17 +10,18 @@ import java.util.List;
 public interface SsqMapper {
     List<SsqEntity> selectAllList();
 
-    SsqEntity selectById();
+    SsqEntity selectById(int id);
+    int getMaxNumId();
 
-    //TODO 待处理
-    List<SsqEntity> selectByConditions(SsqEntity condition);
-
-    Boolean insert(SsqEntity entity);
-    Boolean insertList(List<SsqEntity> entity);
-
-    Boolean update(SsqEntity entity);
-    Boolean updateList(List<SsqEntity> entity);
-
-    Boolean deleteById(long id);
-    Boolean deleteByConditions(SsqEntity entity);
+//    //TODO 待处理
+//    List<SsqEntity> selectByConditions(SsqEntity condition);
+//
+//    Boolean insert(SsqEntity entity);
+//    Boolean insertList(List<SsqEntity> entity);
+//
+//    Boolean update(SsqEntity entity);
+//    Boolean updateList(List<SsqEntity> entity);
+//
+//    Boolean deleteById(long id);
+//    Boolean deleteByConditions(SsqEntity entity);
 }

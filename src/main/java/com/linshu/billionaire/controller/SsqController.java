@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/ssq")
 public class SsqController {
 
     @Autowired
-    private SsqService userService;
+    private SsqService ssqService;
 
-    @RequestMapping("/findAll")
-    public List<SsqEntity> findAll(){
-        return userService.findAll();
+    @RequestMapping("/getAllList")
+    public List<SsqEntity> selectAllList(){
+        return ssqService.selectAllList();
     }
 }

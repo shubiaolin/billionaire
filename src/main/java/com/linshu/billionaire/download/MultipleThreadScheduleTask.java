@@ -1,13 +1,11 @@
 package com.linshu.billionaire.download;
 
-import com.linshu.billionaire.download.controller.Download500ResourcesController;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import static com.linshu.billionaire.download.controller.Download500ResourcesController.Download500;
 
 //@Component注解用于对那些比较中立的类进行注释；
 //相对与在持久层、业务层和控制层分别采用 @Repository、@Service 和 @Controller 对分层中的类进行注释
@@ -15,11 +13,10 @@ import java.time.LocalDateTime;
 @EnableScheduling   // 1.开启定时任务
 @EnableAsync        // 2.开启多线程
 public class MultipleThreadScheduleTask {
-
-    @Async
-    @Scheduled(fixedDelay = 1000000000)  //间隔1秒
+//    @Async
+    @Scheduled(fixedDelay = 1000000000)
     public void first() throws InterruptedException {
-        new Download500ResourcesController().getTurn();
+        Download500.getTurn();
     }
 
 //    @Async
