@@ -1,6 +1,7 @@
 package com.linshu.billionaire.download.controller;
 
 import com.linshu.billionaire.download.util.FetchUrlResources;
+import com.linshu.billionaire.entity.SsqEntity;
 import com.linshu.billionaire.service.SsqService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -56,17 +57,26 @@ public class Download500ResourcesController {
     public void getTurn() {
 //        System.out.println(ssqService.getMaxNumId());
 //        System.out.println(ssqService.selectAllList());
-//        System.out.println(ssqService.selectById(5).toString());
+//        System.out.println(ssqService.selectById(6).toString());
+//        printlnSsqEntity(ssqService.selectByBlueBall(5));
+//        System.out.println(ssqService.countTotalTurn());
 
-//        this.setLoadingTurn(true);
-//        String dbPeriod = "20131"; //TODO 需要在这里获取数据库里面最大的期数，来对比
-//        Document doc = fetchUrlResources.fetchUrl(this.ssqUrl.replace(this.turnStr, this.period));
-//        Elements turnElements = doc.select("div.iSelectList a");
-//        List<String> turns = turnElements.stream().sorted(Comparator.comparing(Element::text)).map(Element::text).collect(Collectors.toList());
-//        if(turns.size() > 0){
-//            this.getBall(turns.subList(turns.indexOf(dbPeriod),turns.size()));
-//        }
-//        this.setLoadingTurn(false);
+        this.setLoadingTurn(true);
+        String dbPeriod = ssqService.getMaxNumId() + "";
+        Document doc = fetchUrlResources.fetchUrl(this.ssqUrl.replace(this.turnStr, this.period));
+        Elements turnElements = doc.select("div.iSelectList a");
+        List<String> turns = turnElements.stream().sorted(Comparator.comparing(Element::text)).map(Element::text).collect(Collectors.toList());
+        if(turns.size() > 0){
+            List<String> newTurns = turns.subList(turns.indexOf(dbPeriod)+1,turns.size());
+            List<SsqEntity> list = new ArrayList<SsqEntity>();
+            for (String turn : newTurns) {
+                SsqEntity entity = new SsqEntity();
+                entity.setNumId(Integer.parseInt(turn));
+                list.add(entity);
+            }
+            System.out.println(ssqService.insertBatch(list));
+        }
+        this.setLoadingTurn(false);
     }
 
     public void reGetBallByDbTurns() {
@@ -94,4 +104,10 @@ public class Download500ResourcesController {
         this.setLoadingBall(false);
     }
 
+    private void printlnSsqEntity(List<SsqEntity> list) {
+        System.out.println(list.size());
+        for (SsqEntity ssqEntity : list) {
+            System.out.println(ssqEntity.toString());
+        }
+    }
 }

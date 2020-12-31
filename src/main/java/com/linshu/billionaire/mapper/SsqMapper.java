@@ -11,7 +11,16 @@ public interface SsqMapper {
     List<SsqEntity> selectAllList();
 
     SsqEntity selectById(int id);
+
     int getMaxNumId();
+
+    int countTotalTurn();
+
+    List<SsqEntity> selectByBlueBall(int blue);
+
+    int insert(SsqEntity entity);
+
+    int insertBatch(List<SsqEntity> entities);
 
 //    //TODO 待处理
 //    List<SsqEntity> selectByConditions(SsqEntity condition);

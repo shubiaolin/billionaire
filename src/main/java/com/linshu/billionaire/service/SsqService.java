@@ -9,5 +9,13 @@ public interface SsqService {
 
     int getMaxNumId();
 
+    int countTotalTurn();
+
     SsqEntity selectById(int id);
+
+    List<SsqEntity> selectByBlueBall(int blue);
+
+    int insert(SsqEntity entity);
+
+    int insertBatch(List<SsqEntity> entities);
 }

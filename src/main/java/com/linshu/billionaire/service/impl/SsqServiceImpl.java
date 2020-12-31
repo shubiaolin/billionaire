@@ -24,7 +24,27 @@ public class SsqServiceImpl implements SsqService {
     }
 
     @Override
+    public int countTotalTurn() {
+        return ssqMapper.countTotalTurn();
+    }
+
+    @Override
     public SsqEntity selectById(int id) {
         return ssqMapper.selectById(id);
+    }
+
+    @Override
+    public List<SsqEntity> selectByBlueBall(int blue) {
+        return ssqMapper.selectByBlueBall(blue);
+    }
+
+    @Override
+    public int insert(SsqEntity entity) {
+        return ssqMapper.insert(entity);
+    }
+
+    @Override
+    public int insertBatch(List<SsqEntity> entities) {
+        return ssqMapper.insertBatch(entities);
     }
 }

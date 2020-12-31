@@ -35,8 +35,34 @@
     </select>
 
 
-<!--    SsqEntity selectById();-->
+<!--    <select id="selectByRedOrderBall" resultMap="result" >-->
 
+<!--    </select>-->
+
+    <select id="selectByBlueBall" resultMap="result" parameterType="int">
+        SELECT * FROM t_ssq WHERE blue = #{blue}
+    </select>
+    
+    <select id="countTotalTurn" resultType="int">
+        SELECT count(id) FROM t_ssq
+    </select>
+
+    <!-- insert -->
+    <insert id="insert" parameterType="SsqEntity" useGeneratedKeys="true" keyProperty="id">
+        insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4,
+                           redOrder5, redOrder6, openDate, updateTime, isDownload)
+        values(#{numId}, #{red1}, #{red2}, #{red3}, #{red4}, #{red5}, #{red6}, #{blue}, #{redOrder1}, #{redOrder2}, #{redOrder3}, #{redOrder4},
+                #{redOrder5}, #{redOrder6}, #{openDate}, #{updateTime}, #{isDownload})
+    </insert>
+
+    <insert id="insertBatch" parameterType="SsqEntity">
+        <foreach collection="entities" item="item" index="index" separator=";">
+            insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4,
+                            redOrder5, redOrder6, openDate, updateTime, isDownload)
+            values(#{item.numId}, #{item.red1}, #{item.red2}, #{item.red3}, #{item.red4}, #{item.red5}, #{item.red6}, #{item.blue}, #{item.redOrder1}, #{item.redOrder2}, #{item.redOrder3}, #{item.redOrder4},
+                        #{item.redOrder5}, #{item.redOrder6}, #{item.openDate}, #{item.updateTime}, #{item.isDownload})
+        </foreach>
+    </insert>
 <!--    //TODO 待处理-->
 <!--    List<SsqEntity> selectByConditions(SsqEntity condition);-->
 
