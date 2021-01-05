@@ -182,6 +182,16 @@ public class SsqEntity {
     this.isDownload = isDownload;
   }
 
+  public int validate() {
+    if(numId == 0 || red1 == 0 || red2 == 0 || red3 == 0 || red4 == 0 || red5 == 0 || red6 == 0 || blue == 0 ||
+        redOrder1 == 0 || redOrder2 == 0 || redOrder3 == 0 || redOrder4 == 0 || redOrder5 == 0 || redOrder6 == 0 || openDate == null || updateTime == null ||
+            ("").equals(openDate) || ("").equals(updateTime)) {
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+
   @Override
   public String toString() {
     return "SsqEntity{" +

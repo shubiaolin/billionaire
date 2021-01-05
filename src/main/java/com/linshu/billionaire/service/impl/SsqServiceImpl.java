@@ -20,12 +20,18 @@ public class SsqServiceImpl implements SsqService {
 
     @Override
     public int getMaxNumId() {
-        return ssqMapper.getMaxNumId();
+        Integer maxNumId = ssqMapper.getMaxNumId();
+        return null == maxNumId ? 0 : maxNumId;
     }
 
     @Override
     public int countTotalTurn() {
         return ssqMapper.countTotalTurn();
+    }
+
+    @Override
+    public List<SsqEntity> getTurnOnIsDownload(int isDownload) {
+        return ssqMapper.getTurnOnIsDownload(isDownload);
     }
 
     @Override
@@ -46,5 +52,10 @@ public class SsqServiceImpl implements SsqService {
     @Override
     public int insertBatch(List<SsqEntity> entities) {
         return ssqMapper.insertBatch(entities);
+    }
+
+    @Override
+    public int update(SsqEntity entity) {
+        return ssqMapper.update(entity);
     }
 }

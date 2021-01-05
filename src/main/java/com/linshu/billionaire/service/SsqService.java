@@ -11,6 +11,8 @@ public interface SsqService {
 
     int countTotalTurn();
 
+    List<SsqEntity> getTurnOnIsDownload(int isDownload);
+
     SsqEntity selectById(int id);
 
     List<SsqEntity> selectByBlueBall(int blue);
@@ -18,4 +20,7 @@ public interface SsqService {
     int insert(SsqEntity entity);
 
     int insertBatch(List<SsqEntity> entities);
+
+    int update(SsqEntity entity);
+
 }

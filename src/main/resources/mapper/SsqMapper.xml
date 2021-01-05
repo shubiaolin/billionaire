@@ -47,22 +47,48 @@
         SELECT count(id) FROM t_ssq
     </select>
 
+    <select id="getTurnOnIsDownload" resultMap="result" parameterType="int">
+        SELECT * FROM t_ssq WHERE isDownload = #{isDownload}
+    </select>
+
     <!-- insert -->
     <insert id="insert" parameterType="SsqEntity" useGeneratedKeys="true" keyProperty="id">
-        insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4,
-                           redOrder5, redOrder6, openDate, updateTime, isDownload)
-        values(#{numId}, #{red1}, #{red2}, #{red3}, #{red4}, #{red5}, #{red6}, #{blue}, #{redOrder1}, #{redOrder2}, #{redOrder3}, #{redOrder4},
-                #{redOrder5}, #{redOrder6}, #{openDate}, #{updateTime}, #{isDownload})
+        insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4, redOrder5, redOrder6, openDate, updateTime, isDownload)
+        values (#{numId}, #{red1}, #{red2}, #{red3}, #{red4}, #{red5}, #{red6}, #{blue}, #{redOrder1}, #{redOrder2}, #{redOrder3}, #{redOrder4}, #{redOrder5}, #{redOrder6}, #{openDate}, #{updateTime}, #{isDownload})
     </insert>
 
     <insert id="insertBatch" parameterType="SsqEntity">
         <foreach collection="entities" item="item" index="index" separator=";">
-            insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4,
-                            redOrder5, redOrder6, openDate, updateTime, isDownload)
-            values(#{item.numId}, #{item.red1}, #{item.red2}, #{item.red3}, #{item.red4}, #{item.red5}, #{item.red6}, #{item.blue}, #{item.redOrder1}, #{item.redOrder2}, #{item.redOrder3}, #{item.redOrder4},
-                        #{item.redOrder5}, #{item.redOrder6}, #{item.openDate}, #{item.updateTime}, #{item.isDownload})
+            insert into t_ssq (numId, red1, red2, red3, red4, red5, red6, blue, redOrder1, redOrder2, redOrder3, redOrder4, redOrder5, redOrder6, openDate, updateTime, isDownload)
+            values (#{item.numId}, #{item.red1}, #{item.red2}, #{item.red3}, #{item.red4}, #{item.red5}, #{item.red6}, #{item.blue}, #{item.redOrder1}, #{item.redOrder2}, #{item.redOrder3}, #{item.redOrder4}, #{item.redOrder5}, #{item.redOrder6}, #{item.openDate}, #{item.updateTime}, #{item.isDownload})
         </foreach>
     </insert>
+
+    <!-- update -->
+    <update id="update" parameterType="SsqEntity">
+        update t_ssq
+        <set>
+            <if test="red1 != 0">red1=#{red1},</if>
+            <if test="red2 != 0">red2=#{red2},</if>
+            <if test="red3 != 0">red3=#{red3},</if>
+            <if test="red4 != 0">red4=#{red4},</if>
+            <if test="red5 != 0">red5=#{red5},</if>
+            <if test="red6 != 0">red6=#{red6},</if>
+            <if test="blue != 0">blue=#{blue},</if>
+            <if test="redOrder1 != 0">redOrder1=#{redOrder1},</if>
+            <if test="redOrder2 != 0">redOrder2=#{redOrder2},</if>
+            <if test="redOrder3 != 0">redOrder3=#{redOrder3},</if>
+            <if test="redOrder4 != 0">redOrder4=#{redOrder4},</if>
+            <if test="redOrder5 != 0">redOrder5=#{redOrder5},</if>
+            <if test="redOrder6 != 0">redOrder6=#{redOrder6},</if>
+            <if test="openDate != null and openDate != ''">openDate=#{openDate},</if>
+            <if test="updateTime != null and updateTime != ''">updateTime=#{updateTime},</if>
+            isDownload=#{isDownload}
+        </set>
+        WHERE id=#{id}
+    </update>
+
+
 <!--    //TODO 待处理-->
 <!--    List<SsqEntity> selectByConditions(SsqEntity condition);-->
 

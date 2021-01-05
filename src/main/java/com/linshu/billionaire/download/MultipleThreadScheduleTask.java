@@ -1,5 +1,7 @@
 package com.linshu.billionaire.download;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -13,16 +15,23 @@ import static com.linshu.billionaire.download.controller.Download500ResourcesCon
 @EnableScheduling   // 1.开启定时任务
 @EnableAsync        // 2.开启多线程
 public class MultipleThreadScheduleTask {
-//    @Async
-    @Scheduled(fixedDelay = 1000000000)
+    @Async
+    @Scheduled(fixedDelay = 3600000) //暂时每隔一个小时执行一次
     public void first() throws InterruptedException {
-        Download500.getTurn();
+        Boolean loadingTurn = Download500.getLoadingTurn();
+
+        if(!loadingTurn){
+            Download500.getTurn();
+        }
     }
 
-//    @Async
-//    @Scheduled(fixedDelay = 2000)
-//    public void second() {
-//        System.out.println("第二个定时任务开始 : " + LocalDateTime.now().toLocalTime() + "\r\n线程 : " + Thread.currentThread().getName());
-//        System.out.println();
-//    }
+    @Async
+    @Scheduled(fixedDelay = 60000)
+    public void downloadBall() {
+        Boolean loadingTurn = Download500.getLoadingTurn();
+
+        if(!loadingTurn){
+            Download500.reGetBallByDbTurns();
+        }
+    }
 }
