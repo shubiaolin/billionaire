@@ -15,8 +15,8 @@ import static com.linshu.billionaire.download.controller.Download500ResourcesCon
 @EnableScheduling   // 1.开启定时任务
 @EnableAsync        // 2.开启多线程
 public class MultipleThreadScheduleTask {
-    @Async
-    @Scheduled(fixedDelay = 3600000) //暂时每隔一个小时执行一次
+//    @Async
+//    @Scheduled(fixedDelay = 3600000) //暂时每隔一个小时执行一次
     public void first() throws InterruptedException {
         Boolean loadingTurn = Download500.getLoadingTurn();
 
@@ -25,13 +25,19 @@ public class MultipleThreadScheduleTask {
         }
     }
 
-    @Async
-    @Scheduled(fixedDelay = 60000)
+//    @Async
+//    @Scheduled(fixedDelay = 60000)
     public void downloadBall() {
         Boolean loadingTurn = Download500.getLoadingTurn();
 
         if(!loadingTurn){
             Download500.reGetBallByDbTurns();
         }
+    }
+
+    @Async
+    @Scheduled(fixedDelay = 60000000)
+    public void calculateRedBall() {
+        Download500.calculateRedBall();
     }
 }

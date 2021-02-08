@@ -3,12 +3,15 @@ package com.linshu.billionaire.mapper;
 import com.linshu.billionaire.entity.SsqEntity;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
 public interface SsqMapper {
     List<SsqEntity> selectAllList();
+
+    List<SsqEntity> selectListBetweenNumId(@Param("start") int start, @Param("end") int end);
 
     SsqEntity selectById(int id);
 

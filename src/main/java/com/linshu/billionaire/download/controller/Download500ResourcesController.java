@@ -2,6 +2,7 @@ package com.linshu.billionaire.download.controller;
 
 import com.linshu.billionaire.download.util.FetchUrlResources;
 import com.linshu.billionaire.entity.SsqEntity;
+import com.linshu.billionaire.service.NextBallService;
 import com.linshu.billionaire.service.SsqService;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,6 +31,9 @@ public class Download500ResourcesController {
 
     @Autowired
     private SsqService ssqService;
+
+    @Autowired
+    private NextBallService nextBallService;
 
     private String period = "20065";
     private String turnStr = "$turn$";
@@ -158,6 +162,10 @@ public class Download500ResourcesController {
         } catch(Exception e) {
             System.err.println(e.getClass());
         }
+    }
+
+    public void calculateRedBall() {
+        nextBallService.calculateNormalRecommend();
     }
 
     private void printlnSsqEntity(List<SsqEntity> list) {

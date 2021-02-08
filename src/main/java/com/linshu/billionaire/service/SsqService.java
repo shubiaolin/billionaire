@@ -7,6 +7,8 @@ import java.util.List;
 public interface SsqService {
     List<SsqEntity> selectAllList();
 
+    List<SsqEntity> selectListBetweenNumId(int start, int end);
+
     int getMaxNumId();
 
     int countTotalTurn();

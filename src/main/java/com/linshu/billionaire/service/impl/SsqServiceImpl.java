@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("userService")
+@Service("ssqServiceImpl")
 public class SsqServiceImpl implements SsqService {
     @Autowired
     private SsqMapper ssqMapper;
@@ -16,6 +16,11 @@ public class SsqServiceImpl implements SsqService {
     @Override
     public List<SsqEntity> selectAllList() {
         return ssqMapper.selectAllList();
+    }
+
+    @Override
+    public List<SsqEntity> selectListBetweenNumId(int start, int end) {
+        return ssqMapper.selectListBetweenNumId(start, end);
     }
 
     @Override

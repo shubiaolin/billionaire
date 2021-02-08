@@ -23,7 +23,13 @@
     </resultMap>
     
     <select id="selectAllList" resultMap="result">
+        SELECT * FROM t_ssq group by numId
+    </select>
+
+    <select id="selectListBetweenNumId" resultMap="result">
         SELECT * FROM t_ssq
+        where numId between #{start} and #{end}
+        group by numId
     </select>
 
     <select id="getMaxNumId" resultType="int">
